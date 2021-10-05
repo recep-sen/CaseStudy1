@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MaterialFinder : MonoBehaviour
 {
-    public Material testmaterial;
-    Material[] duplicatematerials;
+    public Material[] materialList;
+    Material[] duplicateMaterials;
+    public GameObject targetText;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,13 +18,14 @@ public class MaterialFinder : MonoBehaviour
     void FixedUpdate()
     {
         int layermask = 1 << 3;
-        if (Input.GetMouseButtonDown(0))
-        {
+
+        
             RaycastHit hit;
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit,layermask))
             {
                 Mesh m = GetMesh(hit.collider.gameObject);
                 if (m)
+
                 {
                     int[] hittedTriangle = new int[]
                     {
@@ -39,18 +42,22 @@ public class MaterialFinder : MonoBehaviour
                                 subMeshTris[j + 1] == hittedTriangle[1] &&
                                 subMeshTris[j + 2] == hittedTriangle[2])
                             {
-                                Debug.Log(string.Format("triangle index:{0} submesh index:{1} submesh triangle index:{2}", hit.triangleIndex, i, j / 3));
+                                /*Debug.Log(string.Format("triangle index:{0} submesh index:{1} submesh triangle index:{2}", hit.triangleIndex, i, j / 3));
                                 //Material material = hit.collider.GetComponent<MeshRenderer>().sharedMaterials[i];
-                                duplicatematerials = hit.collider.GetComponent<MeshRenderer>().sharedMaterials;
+                                
                                 duplicatematerials[i] = testmaterial;
                                 hit.collider.GetComponent<MeshRenderer>().sharedMaterials = duplicatematerials;
                                 //material = testmaterial;
-                                //Debug.Log(material);
+                                //Debug.Log(material);*/
+                                duplicateMaterials = hit.collider.GetComponent<MeshRenderer>().sharedMaterials;
+                            //Debug.Log(duplicateMaterials[i].name);
+                            targetText.GetComponent<Text>().text = duplicateMaterials[i].name;
+
                             }
                         }
                     }
                 }
-            }
+            
         }
         static Mesh GetMesh(GameObject go)
         {
