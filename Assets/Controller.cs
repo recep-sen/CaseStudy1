@@ -22,5 +22,6 @@ public class Controller : MonoBehaviour
         //Vector3 player_rotation = new Vector3(Input.GetAxisRaw("Mouse Y"), Input.GetAxisRaw("Mouse X"),0 );
         //Quaternion deltaRotation = Quaternion.Euler(player_rotation * Time.fixedDeltaTime*5);
         player_camera.transform.eulerAngles += new Vector3(-Input.GetAxisRaw("Mouse Y"), Input.GetAxisRaw("Mouse X"), 0);
+        
     }
 }
