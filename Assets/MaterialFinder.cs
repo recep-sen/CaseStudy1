@@ -5,9 +5,12 @@ using UnityEngine.UI;
 
 public class MaterialFinder : MonoBehaviour
 {
-    public Material[] materialList;
-    Material[] duplicateMaterials;
+    public static Material[] duplicateMaterials;
+    public static int indexofmaterial;
     public GameObject targetText;
+    public static GameObject targetObject;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +26,7 @@ public class MaterialFinder : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit,layermask))
             {
+            targetObject = hit.collider.gameObject;
                 Mesh m = GetMesh(hit.collider.gameObject);
                 if (m)
 
@@ -52,7 +56,6 @@ public class MaterialFinder : MonoBehaviour
                                 duplicateMaterials = hit.collider.GetComponent<MeshRenderer>().sharedMaterials;
                             //Debug.Log(duplicateMaterials[i].name);
                             targetText.GetComponent<Text>().text = duplicateMaterials[i].name;
-
                             }
                         }
                     }
@@ -76,5 +79,11 @@ public class MaterialFinder : MonoBehaviour
             }
             return (Mesh)null;
         }
+
+    }
+    public static void changecolor(Color color)
+    {
+        duplicateMaterials[indexofmaterial].color = color;
+
     }
 }
