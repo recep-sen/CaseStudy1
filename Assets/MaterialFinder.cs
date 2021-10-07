@@ -86,4 +86,9 @@ public class MaterialFinder : MonoBehaviour
         duplicateMaterials[indexofmaterial].color = color;
 
     }
+    public static void changetexture(Texture texture)
+    {
+        duplicateMaterials[indexofmaterial].mainTexture = texture;
+
+    }
 }

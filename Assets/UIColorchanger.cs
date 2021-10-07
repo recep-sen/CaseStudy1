@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,7 @@ using UnityEngine.UI;
 public class UIColorchanger : MonoBehaviour
 {
     public GameObject dropdownmenu;
-    public GameObject dropdownmenu2;
+    public GameObject texturecode;
     public GameObject crosshair;
     public List<Color> colors = new List<Color>()
 {
@@ -44,7 +45,7 @@ public class UIColorchanger : MonoBehaviour
         {
             if (MaterialFinder.targetObject != null)
             {
-                dropdownmenu2.SetActive(true);
+                texturecode.SetActive(true);
                 crosshair.SetActive(false);
                 Cursor.visible = true;
                 Controller.Movementunlocked = false;
@@ -55,6 +56,14 @@ public class UIColorchanger : MonoBehaviour
     {
         MaterialFinder.changecolor(colors[dropdownmenu.GetComponent<Dropdown>().value]);
         dropdownmenu.SetActive(false);
+        crosshair.SetActive(true);
+        Cursor.visible = false;
+        Controller.Movementunlocked = true;
+    }
+    public void ChangeTexture()
+    {
+        MaterialFinder.changetexture(textures[Int32.Parse(texturecode.GetComponent<InputField>().text)-1]);
+        texturecode.SetActive(false);
         crosshair.SetActive(true);
         Cursor.visible = false;
         Controller.Movementunlocked = true;
