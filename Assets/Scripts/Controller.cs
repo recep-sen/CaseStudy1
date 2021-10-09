@@ -14,6 +14,14 @@ public class Controller : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+    }
+
     void FixedUpdate()
     {
         if (movementUnlocked)

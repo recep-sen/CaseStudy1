@@ -1,4 +1,4 @@
-//A script to find the material camera looking at and also with 2 methods to change color and texture of the said material. They are being called globally from UI scripts.
+//A script to find the material where camera is pointing and also 2 methods to change color and texture of the said material. They are being called globally from UI scripts.
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,7 +15,7 @@ public class MaterialFinder : MonoBehaviour
         //need to check layermask before raycasting because player object has a collider
         int layermask = 1 << 3;
 
-        //raycast to find hit point where camera looks at
+        //raycast to find hit point where camera is pointing
         if (crosshair.activeInHierarchy)
         {
             RaycastHit hit;
@@ -23,7 +23,7 @@ public class MaterialFinder : MonoBehaviour
             {
                 targetObject = hit.collider.gameObject;
 
-                //because there is object with more than one material need to check with submeshes to get array with materials and index of which material camera is looking at
+                //because there are objects with more than one material, need to check within submeshes to get an array with materials and index of which material camera is pointing
                 Mesh m = GetMesh(hit.collider.gameObject);
                 if (m)
 
@@ -43,7 +43,7 @@ public class MaterialFinder : MonoBehaviour
                                 subMeshTris[j + 1] == hitTriangle[1] &&
                                 subMeshTris[j + 2] == hitTriangle[2])
                             {
-                                //Because unity doesnt allow to change materials directly first need to store materials in a duplicate array
+                                //Because unity doesnt allow changing materials directly, need to store materials in a duplicate array
                                 duplicateMaterials = hit.collider.GetComponent<MeshRenderer>().sharedMaterials;
                                 targetText.GetComponent<Text>().text = duplicateMaterials[i].name;
                             }
@@ -73,15 +73,17 @@ public class MaterialFinder : MonoBehaviour
         }
 
     }
-    //method that changes color to color from UI
+
     public static void ChangeColor(Color color)
     {
+        /**method that changes color to color from UI*/
         duplicateMaterials[targetMaterialIndex].color = color;
 
     }
-    //method that changes texture to texture from UI
+
     public static void ChangeTexture(Texture texture)
     {
+        /**method that changes texture to texture from UI*/
         duplicateMaterials[targetMaterialIndex].mainTexture = texture;
 
     }

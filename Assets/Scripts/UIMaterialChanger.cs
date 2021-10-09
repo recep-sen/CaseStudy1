@@ -50,7 +50,7 @@ public class UIMaterialChanger : MonoBehaviour
             }
         }
     }
-    //UI triggers that calls global methods and also disables UI after using 
+    //UI triggers that calls global methods and also disables UI after use
     public void ChangeColor()
     {
         MaterialFinder.ChangeColor(colors[colorPicker.GetComponent<Dropdown>().value]);
@@ -62,11 +62,22 @@ public class UIMaterialChanger : MonoBehaviour
     }
     public void ChangeTexture()
     {
-        MaterialFinder.ChangeTexture(textures[Int32.Parse(texturePicker.GetComponent<InputField>().text)-1]);
-        texturePicker.SetActive(false);
-        crosshair.SetActive(true);
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        Controller.movementUnlocked = true;
+        if(Int32.Parse(texturePicker.GetComponent<InputField>().text) - 1 < 52 && Int32.Parse(texturePicker.GetComponent<InputField>().text) - 1 > -1)
+        {
+            MaterialFinder.ChangeTexture(textures[Int32.Parse(texturePicker.GetComponent<InputField>().text) - 1]);
+            texturePicker.SetActive(false);
+            crosshair.SetActive(true);
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            Controller.movementUnlocked = true;
+        }
+        else
+        {
+            texturePicker.SetActive(false);
+            crosshair.SetActive(true);
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            Controller.movementUnlocked = true;
+        }
     }
 }
